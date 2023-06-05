@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "qagc_env"
+version = "0.1.0"
+description = ""
+authors = ["Toshihiro NAKAE <nakae.tshr@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10.0,<3.11.0"
+quri-parts = {version = "0.10.0", extras = ["cirq", "openfermion", "qiskit", "quantinuum", "qulacs"]}
+qiskit = "0.39.5"
+cirq = "1.1.0"
+openfermion = "1.5.1"
+qulacs = "0.5.6"
+numpy = "1.23.5"
+jupyterlab = "^4.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
