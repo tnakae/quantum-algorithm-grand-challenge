@@ -14,6 +14,8 @@ openfermion = "1.5.1"
 qulacs = "0.5.6"
 numpy = "1.23.5"
 jupyterlab = "^4.0.1"
+pyscf = "^2.2.1"
+openfermionpyscf = "^0.5"
 
 
 [build-system]

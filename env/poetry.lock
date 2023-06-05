@@ -1157,6 +1157,18 @@ files = [
 ]
 
 [[package]]
+name = "iniconfig"
+version = "2.0.0"
+description = "brain-dead simple config-ini parsing"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "iniconfig-2.0.0-py3-none-any.whl", hash = "sha256:b6a85871a79d2e3b22d2d1b94ac2824226a63c6b741c88f7ae975f18b6778374"},
+    {file = "iniconfig-2.0.0.tar.gz", hash = "sha256:2d91e135bf72d31a410b17c16da610a82cb55f6b0477d1a902134b24a455b8b3"},
+]
+
+[[package]]
 name = "ipykernel"
 version = "6.23.1"
 description = "IPython Kernel for Jupyter"
@@ -2089,6 +2101,23 @@ scipy = ">=1.1.0"
 sympy = "*"
 
 [[package]]
+name = "openfermionpyscf"
+version = "0.5"
+description = "A plugin allowing OpenFermion to interface with PySCF."
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "openfermionpyscf-0.5-py3-none-any.whl", hash = "sha256:a5679edf78808352df615f366e65d81316a502e4aa814601142a66fd9dc9c58f"},
+    {file = "openfermionpyscf-0.5.tar.gz", hash = "sha256:60b7a8a03e4e2415b5e5b4f8aed02203add0fe90eafff5873580cf2d6d67729f"},
+]
+
+[package.dependencies]
+openfermion = ">=0.5"
+pyscf = "*"
+pytest = "*"
+
+[[package]]
 name = "overrides"
 version = "7.3.1"
 description = "A decorator to automatically detect mismatch when overriding a method."
@@ -2338,6 +2367,22 @@ files = [
 [package.extras]
 docs = ["furo (>=2023.3.27)", "proselint (>=0.13)", "sphinx (>=6.2.1)", "sphinx-autodoc-typehints (>=1.23,!=1.23.4)"]
 test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.3.1)", "pytest-cov (>=4)", "pytest-mock (>=3.10)"]
+
+[[package]]
+name = "pluggy"
+version = "1.0.0"
+description = "plugin and hook calling mechanisms for python"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "pluggy-1.0.0-py2.py3-none-any.whl", hash = "sha256:74134bbf457f031a36d68416e1509f34bd5ccc019f0bcc952c7b909d06b37bd3"},
+    {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
+]
+
+[package.extras]
+dev = ["pre-commit", "tox"]
+testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "ply"
@@ -2706,6 +2751,57 @@ files = [
 ]
 
 [[package]]
+name = "pyscf"
+version = "2.2.1"
+description = "PySCF: Python-based Simulations of Chemistry Framework"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pyscf-2.2.1-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:c57c02b01caef2ecb7e173d3d244e8aef88c347baae50bd536e5e2ed344d1b06"},
+    {file = "pyscf-2.2.1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:29889ffc3afef89961b6f192a70d5b366c4241534bbf3639419d535a090ba867"},
+    {file = "pyscf-2.2.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:b107f618957d9012558a01ebd733a53df845c756e83a33a2140a6f93947d31b2"},
+    {file = "pyscf-2.2.1-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:d91cff5afa1ccc2b56c0ec6d4f5bff73790e4c895bfa614531cc2114d2a1151c"},
+    {file = "pyscf-2.2.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:e69e586b06d377c1b37c6e009707cf878dba28d24b511ab04c0a63bdee17f4ab"},
+    {file = "pyscf-2.2.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:940e2e6faf02fa9242cba2be684bc344ba924d7143e17818fbeafc27b6043a0c"},
+    {file = "pyscf-2.2.1-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:580c9a706cb1431b5235319377cfa40a7a1bfb2d38c1c20223bf24a22acdba05"},
+    {file = "pyscf-2.2.1-cp36-cp36m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d6ffc6903e4ed7f0c88ce77175cd8407bf7bcaefa410d386d7318f3834d6bde3"},
+    {file = "pyscf-2.2.1-cp36-cp36m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2343d6788f711158f0a2dbfff47c06d85c961c5f8ad591ef7ea80d721ef05e91"},
+    {file = "pyscf-2.2.1-cp37-cp37m-macosx_10_15_x86_64.whl", hash = "sha256:28016bbaedc969bac7f241f5eed11de088accf23343d4e349ba3129d15b83454"},
+    {file = "pyscf-2.2.1-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c4b41aae766c4d3136be67a6bbb252cba4c55bb490e6f390d36c94635cd5f89b"},
+    {file = "pyscf-2.2.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:92c632901bac59137e35dff79fc78280e6511ccf5f2b411554cfebe2c639190e"},
+    {file = "pyscf-2.2.1-cp38-cp38-macosx_10_15_x86_64.whl", hash = "sha256:ff96e85977d7bf5017b19c6de37f87129c888e1c64d895be613cc955f7e748ff"},
+    {file = "pyscf-2.2.1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:985a94bd34e15ede01a90d5d44d2e0f3c4946603c2ad887559a434c0385a0633"},
+    {file = "pyscf-2.2.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:69f3dc501a71d2b4c0e98ca028b42684e8e16b548ec1e6fe4978fde8c0786f7d"},
+    {file = "pyscf-2.2.1-cp39-cp39-macosx_11_0_x86_64.whl", hash = "sha256:365123d0314257e720c038ec51bd09a87fcfdb76ab5a7612543cb851292a80db"},
+    {file = "pyscf-2.2.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:6e7bcdda255b19cf5f95863d1537a98fb6c561927f582dad9aac0203f29f8d5d"},
+    {file = "pyscf-2.2.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ee89c5a9e7e10482da10d15f54801ef4312971f5c9e87361dd2e68eb036714f0"},
+    {file = "pyscf-2.2.1.tar.gz", hash = "sha256:4ff6851351caadc5dfa543b6b2c5fbd926ded87e3cc39faa0054e1e5090ed69a"},
+]
+
+[package.dependencies]
+h5py = ">=2.7"
+numpy = ">=1.13,<1.16 || >1.16,<1.17 || >1.17"
+scipy = "<1.5.0 || >1.5.0,<1.5.1 || >1.5.1"
+
+[package.extras]
+all = ["basis-set-exchange", "cppe", "geometric (>=0.9.7.2)", "mcfun (>=0.2.1)", "pyberny (>=0.6.2)", "pyqmc", "pyscf-doci", "pyscf-icmpspt", "pyscf-properties", "pyscf-qsdopt", "pyscf-semiempirical", "pyscf-shciscf"]
+bse = ["basis-set-exchange"]
+cornell-shci = ["pyscf-cornell-shci"]
+cppe = ["cppe"]
+doci = ["pyscf-doci"]
+fciqmcscf = ["pyscf-fciqmc"]
+geomopt = ["geometric (>=0.9.7.2)", "pyberny (>=0.6.2)", "pyscf-qsdopt"]
+icmpspt = ["pyscf-icmpspt"]
+mcfun = ["mcfun (>=0.2.1)"]
+nao = ["pyscf-nao"]
+properties = ["pyscf-properties"]
+pyqmc = ["pyqmc"]
+semiempirical = ["pyscf-semiempirical"]
+shciscf = ["pyscf-shciscf"]
+tblis = ["pyscf-tblis"]
+
+[[package]]
 name = "pyspnego"
 version = "0.9.0"
 description = "Windows Negotiate Authentication Client and Server"
@@ -2733,6 +2829,29 @@ cryptography = "*"
 [package.extras]
 kerberos = ["gssapi (>=1.6.0)", "krb5 (>=0.3.0)"]
 yaml = ["ruamel.yaml"]
+
+[[package]]
+name = "pytest"
+version = "7.3.1"
+description = "pytest: simple powerful testing with Python"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "pytest-7.3.1-py3-none-any.whl", hash = "sha256:3799fa815351fea3a5e96ac7e503a96fa51cc9942c3753cda7651b93c1cfa362"},
+    {file = "pytest-7.3.1.tar.gz", hash = "sha256:434afafd78b1d78ed0addf160ad2b77a30d35d4bdf8af234fe621919d9ed15e3"},
+]
+
+[package.dependencies]
+colorama = {version = "*", markers = "sys_platform == \"win32\""}
+exceptiongroup = {version = ">=1.0.0rc8", markers = "python_version < \"3.11\""}
+iniconfig = "*"
+packaging = "*"
+pluggy = ">=0.12,<2.0"
+tomli = {version = ">=1.0.0", markers = "python_version < \"3.11\""}
+
+[package.extras]
+testing = ["argcomplete", "attrs (>=19.2.0)", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
 name = "python-dateutil"
@@ -4470,4 +4589,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10.0,<3.11.0"
-content-hash = "80130f5b39acd9cf6b30f26521e572dcc955da5f7359ac6b653903df1b1f71c8"
+content-hash = "e97252b83706fa004807a302c9f009bf36b8e8f94764c28606482b8fd5375657"
