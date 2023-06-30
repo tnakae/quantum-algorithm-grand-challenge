@@ -1,5 +1,5 @@
 import sys
-from typing import Any
+from typing import Any, Tuple
 
 import numpy as np
 from openfermion.transforms import jordan_wigner
@@ -26,7 +26,7 @@ It will take about 6-7 hours to run this code on 8 qubits.
 challenge_sampling = ChallengeSampling(noise=True)
 
 
-def cost_fn(hamiltonian, parametric_state, param_values, estimator):
+def cost_fn(hamiltonian, parametric_state, param_values, estimator) -> float:
     estimate = estimator(hamiltonian, parametric_state, [param_values])
     return estimate[0].value.real
 
@@ -71,6 +71,28 @@ class RunAlgorithm:
 
         return energy_final, qc_time_final
 
+    def get_optimal_random_params(self, hamiltonian, parametric_state, estimator,
+                                  dim: int, n_trials: int = 20) -> Tuple[np.ndarray, float]:
+        rng = np.random.RandomState(12)
+        current_param = None
+        current_cost = np.inf
+
+        for iter in range(n_trials):
+            print(f"Param No.{iter+1} : ", flush=True, end="")
+            param = rng.uniform(size=dim) * 2 * np.pi
+            cost = cost_fn(hamiltonian, parametric_state, param, estimator)
+            print(f" cost = {cost:10.4f}", flush=True, end="")
+
+            if current_param is None or cost < current_cost:
+                print(" => best param", flush=True)
+                current_param = param
+                current_cost = cost
+            else:
+                print(" ... rejected.", flush=True)
+
+        assert current_param is not None
+        return current_param, current_cost
+
     def get_result(self) -> Any:
         n_site = 4
         n_qubits = 2 * n_site
@@ -92,7 +114,7 @@ class RunAlgorithm:
         hardware_type = "sc"
         shots_allocator = create_equipartition_shots_allocator()
         measurement_factory = bitwise_commuting_pauli_measurement
-        n_shots = 10**5
+        n_shots = 10**3
 
         sampling_estimator = (
             challenge_sampling.create_concurrent_parametric_sampling_estimator(
@@ -102,8 +124,14 @@ class RunAlgorithm:
 
         adam_optimizer = Adam(ftol=10e-5)
 
-        init_param = np.random.rand(hw_ansatz.parameter_count) * 2 * np.pi * 0.001
+        print("Now extracting best init random params...")
+        init_param, _ = self.get_optimal_random_params(hamiltonian,
+                                                       parametric_state,
+                                                       sampling_estimator,
+                                                       hw_ansatz.parameter_count,
+                                                       n_trials=64)
 
+        print("Now starting vqe...")
         result = vqe(
             hamiltonian,
             parametric_state,
