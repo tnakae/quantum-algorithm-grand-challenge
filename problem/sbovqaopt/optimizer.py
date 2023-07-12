@@ -66,7 +66,7 @@ class SBOOptimizer(Optimizer):
         self.epsilon_f = epsilon_f
 
     def get_init_state(self, x0: FloatArray) -> OptimizerState:
-        return SBOOptimizerState(x0)
+        return SBOOptimizerState(params=x0, niter=0)
 
     def step(
         self,
