@@ -1,10 +1,7 @@
-from .optimizer import (
-    SBOOptimizer,
-    POINT,
-)
-
+from .optimizer import SBOOptimizer
+from .typing import FloatArray
 
 __all__ = [
     "SBOOptimizer",
-    "POINT",
+    "FloatArray",
 ]

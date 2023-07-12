@@ -4,45 +4,47 @@ import numpy as np
 from openfermion.transforms import jordan_wigner
 from openfermion.utils import load_operator
 from quri_parts.algo.ansatz import HardwareEfficientReal
-from quri_parts.algo.optimizer import Optimizer, OptimizerState, OptimizerStatus
+from quri_parts.algo.optimizer import (Optimizer, OptimizerState,
+                                       OptimizerStatus)
 from quri_parts.core.estimator import ConcurrentParametricQuantumEstimator
 from quri_parts.core.measurement import bitwise_commuting_pauli_measurement
 from quri_parts.core.operator import Operator
-from quri_parts.core.sampling.shots_allocator import (
-    create_equipartition_shots_allocator,
-)
-from quri_parts.core.state import ParametricCircuitQuantumState, ComputationalBasisState
+from quri_parts.core.sampling.shots_allocator import \
+    create_equipartition_shots_allocator
+from quri_parts.core.state import (ComputationalBasisState,
+                                   ParametricCircuitQuantumState)
 from quri_parts.openfermion.operator import operator_from_openfermion_op
 
-from utils.challenge_2023 import ChallengeSampling, QuantumCircuitTimeExceededError
-from sbovqaopt import (
-    SBOOptimizer,
-    POINT,
-)
+from sbovqaopt import FloatArray, SBOOptimizer
+from utils.challenge_2023 import (ChallengeSampling,
+                                  QuantumCircuitTimeExceededError)
 
 challenge_sampling = ChallengeSampling(noise=True)
 
 
-def cost_fn(hamiltonian: Operator,
-            parametric_state: ParametricCircuitQuantumState,
-            param_values: POINT,
-            estimator: ConcurrentParametricQuantumEstimator[ParametricCircuitQuantumState]) \
-        -> float:
+def cost_fn(
+    hamiltonian: Operator,
+    parametric_state: ParametricCircuitQuantumState,
+    param_values: FloatArray,
+    estimator: ConcurrentParametricQuantumEstimator[ParametricCircuitQuantumState],
+) -> float:
     estimate = estimator(hamiltonian, parametric_state, [param_values])
     return list(estimate)[0].value.real
 
 
-def vqe(hamiltonian: Operator,
-        parametric_state: ParametricCircuitQuantumState,
-        estimator: ConcurrentParametricQuantumEstimator[ParametricCircuitQuantumState],
-        init_params: POINT,
-        optimizer: Optimizer) -> OptimizerState:
+def vqe(
+    hamiltonian: Operator,
+    parametric_state: ParametricCircuitQuantumState,
+    estimator: ConcurrentParametricQuantumEstimator[ParametricCircuitQuantumState],
+    init_params: FloatArray,
+    optimizer: Optimizer,
+) -> OptimizerState:
     opt_state: OptimizerState = optimizer.get_init_state(init_params)
 
-    def c_fn(param_values: POINT) -> float:
+    def c_fn(param_values: FloatArray) -> float:
         return cost_fn(hamiltonian, parametric_state, param_values, estimator)
 
-    def g_fn(param_values: POINT) -> POINT:
+    def g_fn(param_values: FloatArray) -> FloatArray:
         return np.zeros_like(param_values)
 
     while True:
@@ -94,7 +96,7 @@ class RunAlgorithm:
         hardware_type = "sc"
         shots_allocator = create_equipartition_shots_allocator()
         measurement_factory = bitwise_commuting_pauli_measurement
-        n_shots = 10**5
+        n_shots = 10**4
 
         sampling_estimator = (
             challenge_sampling.create_concurrent_parametric_sampling_estimator(
@@ -103,7 +105,9 @@ class RunAlgorithm:
         )
 
         optimizer = SBOOptimizer()
-        init_param: POINT = np.random.rand(hw_ansatz.parameter_count) * 2 * np.pi * 0.001
+        init_param: FloatArray = (
+            np.random.rand(hw_ansatz.parameter_count) * 2 * np.pi * 0.001
+        )
 
         result = vqe(
             hamiltonian,
@@ -114,7 +118,6 @@ class RunAlgorithm:
         )
         print(f"iteration used: {result.niter}")
         return result.cost
-
 
 
 if __name__ == "__main__":

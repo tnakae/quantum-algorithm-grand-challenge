@@ -1,8 +1,8 @@
-import numpy as np
 import sys
 import traceback
-
 from typing import Optional
+
+import numpy as np
 
 from example import RunAlgorithm
 

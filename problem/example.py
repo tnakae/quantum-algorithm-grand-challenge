@@ -4,20 +4,20 @@ from typing import Any
 import numpy as np
 from openfermion.transforms import jordan_wigner
 from openfermion.utils import load_operator
-
 from quri_parts.algo.ansatz import HardwareEfficientReal
 from quri_parts.algo.optimizer import Adam, OptimizerStatus
-from quri_parts.core.estimator.gradient import parameter_shift_gradient_estimates
+from quri_parts.core.estimator.gradient import \
+    parameter_shift_gradient_estimates
 from quri_parts.core.measurement import bitwise_commuting_pauli_measurement
-from quri_parts.core.sampling.shots_allocator import (
-    create_equipartition_shots_allocator,
-)
-from quri_parts.core.state import ParametricCircuitQuantumState, ComputationalBasisState
+from quri_parts.core.sampling.shots_allocator import \
+    create_equipartition_shots_allocator
+from quri_parts.core.state import (ComputationalBasisState,
+                                   ParametricCircuitQuantumState)
 from quri_parts.openfermion.operator import operator_from_openfermion_op
 
 sys.path.append("../")
-from utils.challenge_2023 import ChallengeSampling, QuantumCircuitTimeExceededError
-
+from utils.challenge_2023 import (ChallengeSampling,
+                                  QuantumCircuitTimeExceededError)
 
 """
 It will take about 6-7 hours to run this code on 8 qubits.
