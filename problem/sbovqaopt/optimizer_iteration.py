@@ -105,8 +105,14 @@ class SBOOptimizerIteration:
             patch_center_x, patch_size, npoints_per_patch
         )
         measured_values: FloatArray = np.atleast_2d(
-            [f(x) for x in training_point_angles]
+            [0. for x in training_point_angles]
         ).T
+
+        for i in range(measured_values.shape[0]):
+            v = f(training_point_angles[i])
+            measured_values[i, 0] = v
+            print(f" No.{i:3d} : {v:.4f} : " +
+                  ", ".join([f"{pos:6.4f}" for pos in training_point_angles[i]]))
 
         return self._minimize_kde(
             training_point_angles,

@@ -52,6 +52,7 @@ def vqe(
             opt_state = optimizer.step(opt_state, c_fn, g_fn)
             print(f"iteration {opt_state.niter}")
             print(opt_state.cost)
+            print(opt_state.params)
         except QuantumCircuitTimeExceededError:
             print("Reached the limit of shots")
             return opt_state
@@ -96,7 +97,7 @@ class RunAlgorithm:
         hardware_type = "sc"
         shots_allocator = create_equipartition_shots_allocator()
         measurement_factory = bitwise_commuting_pauli_measurement
-        n_shots = 10**4
+        n_shots = 3e3
 
         sampling_estimator = (
             challenge_sampling.create_concurrent_parametric_sampling_estimator(

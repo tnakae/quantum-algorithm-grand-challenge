@@ -48,10 +48,10 @@ class SBOOptimizer(Optimizer):
 
     def __init__(
         self,
-        maxiter: int = 100,
-        patch_size: float = 0.1,
-        npoints_per_patch: int = 20,
-        epsilon_i: float = 0.0,
+        maxiter: int = 64,
+        patch_size: float = 0.05,
+        npoints_per_patch: int = 16,
+        epsilon_i: float = 0.1,
         epsilon_int: float = 0.05,
         epsilon_f: float = 0.5,
     ) -> None:
@@ -107,11 +107,16 @@ class SBOOptimizer(Optimizer):
         result_state: SBOOptimizerState
 
         if niter < self.maxiter:
+            calculated = cost_function(current_x)
+            print(f"           niter : {niter:6d}")
+            print(f"            dist : {distance:6.4f}")
+            print(f"  estimated cost : {cost:6.4f}")
+            print(f" calculated cost : {calculated:6.4f}")
             result_state = SBOOptimizerState(
                 params=current_x,
                 niter=niter,
                 local_minima_found=local_minima_found,
-                cost=cost,
+                cost=calculated,
                 status=OptimizerStatus.SUCCESS,
             )
         else:
